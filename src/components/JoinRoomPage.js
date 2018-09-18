@@ -3,7 +3,12 @@ import { connect } from 'react-redux';
 import { startCreateRoom, startJoinRoom } from '../actions/rooms';
 
 import database, { firebase } from '../firebase/firebase';
-
+/***
+* Render JoinRoomPage Page component.
+* @param {auth} Auth object.
+* @param {startCreateRoom} Funtion handler for create a Room.
+* @param {startJoinRoom} Funtion handler for joining a Room.
+***/
 export class JoinRoomPage extends React.Component {
 	state = {
 		error: '',
