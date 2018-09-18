@@ -28,7 +28,7 @@ class ShowRooms extends React.Component {
 				return (
 					<div key={idx} className="room-name-wrapper">
 						<NavLink to={`/room/${room.name}`} activeClassName="room-selected">
-							<div className="room-name">{room.name}</div>
+							<div className="room-name">{room.name.toUpperCase()}</div>
 						</NavLink>
 					</div>
 				);
@@ -41,6 +41,7 @@ class ShowRooms extends React.Component {
 		return (
 			<div className="container__left">
 				<div className="container__left__text">
+					<h3 className="header--user">Public Channels</h3>
 					{this.returnRooms()}
 					<ShowUsers />
 				</div>
