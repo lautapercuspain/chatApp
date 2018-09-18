@@ -131,7 +131,6 @@ const isAlreadyAdded = (data, id) => {
 };
 
 export const startJoinRoom = (data = {}, showJoinError) => {
-	console.log('startJoinRoom Data::::::',data);
 	const notificationData = {
 		body: `${data.name} has invited you to join the room ${data.roomName}`,
 		link: `http://localhost:4172/room/${data.roomName}`
@@ -141,9 +140,8 @@ export const startJoinRoom = (data = {}, showJoinError) => {
 			const users = snapshot.val();
 			for (var key in users) {
 				if (users.hasOwnProperty(key)) {
-					if (key === data.id) {	
-            console.log('notificationToken',users[key].notificationToken)
-					  return  postNotification(notificationData, users[key].notificationToken);
+					if (key === data.id) {
+						return postNotification(notificationData, users[key].notificationToken);
 					}
 				}
 			}
@@ -195,7 +193,6 @@ export const startJoinRoom = (data = {}, showJoinError) => {
 					const perName = person.name;
 
 					dispatch(startSendMessage(`${perName} joined`, data.roomName, true));
-
 					history.push(`room/${data.roomName}`);
 				});
 			}
@@ -262,7 +259,6 @@ export const setStartState = () => {
 							);
 						});
 					}
-					// console.log('hello')
 					dispatch(orderRoomsStartState());
 				}
 			});
