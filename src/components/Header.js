@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { askForPermissioToReceiveNotifications } from '../push-notification';
 import { startLogout } from '../actions/auth';
-
+/***
+* Render Chat Page component.
+* @param {auth} Auth object.
+* @param {startLogout} Funtion handler for logout.
+***/
 export const Header = ({ auth, startLogout }) => (
 	<header className="header">
 		<div className="content-container">
