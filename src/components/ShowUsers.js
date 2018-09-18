@@ -16,12 +16,11 @@ class ShowUsers extends React.Component {
 
 	createOneToOneChat = (roomId, targetUser) => {
 		const user = this.props.auth;
-		console.log('createOneToOneChat::', user);
 		if (roomId) {
 			const name = user.displayName;
 			const room = {
 				name: roomId,
-				private: true,
+				private: false,
 				people: {
 					id: user.uid,
 					name,
@@ -29,7 +28,6 @@ class ShowUsers extends React.Component {
 					lastRead: 0
 				}
 			};
-			console.log('Room object::', room);
 			this.props.startCreateRoom(room, this.showCreateError);
 		}
 		if (targetUser) {
@@ -39,7 +37,6 @@ class ShowUsers extends React.Component {
 				name: targetUser.name,
 				unread: 0
 			};
-			console.log('target user data', targetUser);
 			this.props.startJoinRoom(data, this.showJoinError);
 		}
 	};
