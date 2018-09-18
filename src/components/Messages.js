@@ -4,10 +4,6 @@ import selectMessages from '../selectors/messages';
 import moment from 'moment';
 
 class Messages extends React.Component {
-	scrollToBottom = (options) => {
-		this.messagesEnd.scrollIntoView(options);
-	};
-
 	componentDidMount() {
 		this.scrollToBottom(false);
 	}
@@ -15,6 +11,9 @@ class Messages extends React.Component {
 	componentDidUpdate() {
 		this.scrollToBottom({ block: 'end', behavior: 'smooth' });
 	}
+	scrollToBottom = (options) => {
+		this.messagesEnd.scrollIntoView(options);
+	};
 
 	displayMessages = (messages) => {
 		if (typeof messages === 'string') {
@@ -22,7 +21,6 @@ class Messages extends React.Component {
 		}
 		let chatList = [],
 			prevSender;
-		// console.log(messages);
 		messages.forEach((message) => {
 			const name = <p className="message__name">{message.sender.displayName}</p>;
 			const time = (
@@ -61,10 +59,12 @@ class Messages extends React.Component {
 	};
 
 	render() {
+		const { messages } = this.props;
+
 		return (
 			<div className="messages-box">
 				<ul>
-					{this.displayMessages(this.props.messages)}
+					{this.displayMessages(messages)}
 					<li
 						ref={(el) => {
 							this.messagesEnd = el;
