@@ -126,7 +126,7 @@ export class JoinRoomPage extends React.Component {
 					</form>
 				</div>
 				<div className="box-layout__box--join">
-					<h1 className="box-layout__title">Create a room</h1>
+					<h1 className="box-layout__title">Create public room</h1>
 					<form onSubmit={this.onCreateRoom} autoComplete="off">
 						<input className="text-input--join" placeholder="Enter Room name" name="rname" />
 						<button className="button--join">Create</button>
