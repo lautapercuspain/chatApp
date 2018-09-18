@@ -82,7 +82,7 @@ module.exports = (env) => {
 			contentBase: path.join(__dirname, 'public'),
 			historyApiFallback: true,
 			publicPath: '/dist/',
-			port: 4172
+			port: 3000
 		}
 	};
 };
