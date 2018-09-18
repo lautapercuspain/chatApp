@@ -16,7 +16,7 @@ To get notifications, after login into the app, click the Get Notification butto
 
 In the /join route, the user can create a public room.
 In other window a user can load the app and use the Join Room form in order to join to a public channel.
-Public channel are listed in the left sidebar, and could also be clicked to enter in.
+Public channels are listed in the left sidebar, and could also be clicked to enter in.
 
 To create a private channel, use the Create private Room form. The user will be redirected to that channel.
 At the top left corner, an invite people button is present, in order to invite people to the new private channel.
