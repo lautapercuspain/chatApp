@@ -1,8 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { startCreateRoom, startJoinRoom } from '../actions/rooms';
 import { fetchAllUsers } from '../actions/users';
 import { NavLink } from 'react-router-dom';
+
+/***
+* ShowUsers Page component.
+* @param {auth} Object, the currently logged in user. 
+* @param {users}  function handler.
+* @param {startClearUnread}  function handler.
+* @param {startJoinRoom}  function handler.
+* @param {startCreateRoom}  function handler.
+***/
 
 class ShowUsers extends React.Component {
 	state = {
@@ -87,6 +97,14 @@ class ShowUsers extends React.Component {
 		);
 	}
 }
+
+ShowUsers.propTypes = {
+	auth: PropTypes.object,
+	users: PropTypes.oneOfType([ PropTypes.object, PropTypes.array ]).isRequired,
+	fetchAllUsers: PropTypes.func,
+	startJoinRoom: PropTypes.func,
+	startCreateRoom: PropTypes.func
+};
 
 const mapStateToProps = (state) => ({
 	auth: state.auth,
