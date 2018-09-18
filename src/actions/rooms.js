@@ -133,7 +133,7 @@ const isAlreadyAdded = (data, id) => {
 export const startJoinRoom = (data = {}, showJoinError) => {
 	const notificationData = {
 		body: `${data.name} has invited you to join the room ${data.roomName}`,
-		link: `http://localhost:4172/room/${data.roomName}`
+		link: `https://powerful-waters-47598.herokuapp.com/room/${data.roomName}`
 	};
 	database.ref('users').once('value', (snapshot) => {
 		if (snapshot.val()) {
