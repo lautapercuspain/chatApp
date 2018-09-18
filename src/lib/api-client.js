@@ -6,6 +6,7 @@ const serverKey =
 /**
  * Post a notification to fcm
  * @param {Data} An object with notification attributes.
+ * @param {userToken} String, the user token to send the notification.
  */
 export function postNotification(data = null, userToken) {
 	new Promise((resolve, reject) => {
@@ -13,8 +14,8 @@ export function postNotification(data = null, userToken) {
 			method: 'post',
 			url: apiUrl,
 			headers: {
-        "Content-Type": 'application/json',
-				"Authorization": `key=${serverKey}`,
+				'Content-Type': 'application/json',
+				'Authorization': `key=${serverKey}`
 			},
 			data: {
 				notification: {
@@ -27,8 +28,8 @@ export function postNotification(data = null, userToken) {
 			}
 		})
 			.then((response) => {
-        console.log('response:::',response)
-        return resolve(response);
+				console.log('response:::', response);
+				return resolve(response);
 			})
 			.catch((error) => {
 				return reject(error);
