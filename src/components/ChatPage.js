@@ -13,7 +13,6 @@ export class ChatPage extends React.Component {
 		const { rooms } = this.props;
 		if (rooms.length > 0) {
 			const a = rooms.find((room) => {
-				console.log(room);
 				return room.name === roomName;
 				// const roomPath = a.id;
 				// this.props.startClearUnread(this.roomName);
