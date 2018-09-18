@@ -36,6 +36,7 @@
 		"prop-types": "^15.6.2",
 		"react": "15.6.1",
 		"react-addons-shallow-compare": "15.6.0",
+		"react-autocomplete": "^1.8.1",
 		"react-dates": "12.3.0",
 		"react-dom": "15.6.1",
 		"react-modal": "2.2.2",
