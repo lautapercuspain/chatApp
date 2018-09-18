@@ -4,7 +4,6 @@ import createHistory from 'history/createBrowserHistory';
 import NotFoundPage from '../components/NotFoundPage';
 import LoginPage from '../components/LoginPage';
 import JoinRoomPage from '../components/JoinRoomPage';
-import ChatPage from '../components/ChatPage';
 import RoomPage from '../components/RoomPage';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
