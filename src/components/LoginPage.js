@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { startLogin } from '../actions/auth';
-
+/***
+* Render Login Page component.
+* @param {startLogin} Function handler for starting the login process.
+***/
 export const LoginPage = ({ startLogin }) => (
   <div className="box-layout">
     <div className="box-layout__box">
@@ -11,6 +14,10 @@ export const LoginPage = ({ startLogin }) => (
     </div>
   </div>
 );
+
+LoginPage.propTypes = {
+  startLogin: React.PropTypes.func.isRequired
+}
 
 const mapDispatchToProps = (dispatch) => ({
   startLogin: () => dispatch(startLogin())
