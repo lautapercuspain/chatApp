@@ -1,4 +1,5 @@
-import React,  { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { startSendMessage, startLeaveRoom, startJoinRoom, startClearUnread } from '../actions/rooms';
 import { fetchAllUsers } from '../actions/users';
@@ -99,7 +100,7 @@ export class RoomPage extends React.Component {
 }
 
 RoomPage.propTypes = {
-	rooms: React.PropTypes.array,
+	rooms: PropTypes.array,
 	auth: PropTypes.object,
 	startSendMessage:PropTypes.func,
 	startLeaveRoom:PropTypes.func,
