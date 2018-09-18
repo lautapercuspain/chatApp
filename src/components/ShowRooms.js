@@ -2,20 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { getRoomsFromDB } from '../actions/rooms';
+import { startClearUnread } from '../actions/rooms';
 import ShowUsers from './ShowUsers';
 
 /***
 * Render ShowRooms Page component.
-* @param {allRooms} Array, representing all existing rooms in the DB. 
+* @param {rooms} Array, representing all existing rooms in the DB. 
 * @param {auth} Object, representing the current user logged in. 
-* @param {getRoomsFromDB} Function, A handler to fetch all the rooms. 
 ***/
 class ShowRooms extends React.Component {
-	componentWillMount() {
-		this.props.getRoomsFromDB();
-	}
-
 	showUnread = (room) => {
 		const user = this.props.auth;
 		if (user) {
@@ -28,18 +23,25 @@ class ShowRooms extends React.Component {
 	};
 
 	returnRooms = () => {
-		const allRooms = this.props.allRooms[0] && this.props.allRooms[0].filter((room) => !room.private);
-		if (allRooms && allRooms.length > 0) {
-			const rooms = allRooms.map((room, idx) => {
+		const rooms = this.props.rooms;
+
+		if (rooms.length > 0) {
+			const roomList = rooms.map((room, idx) => {
 				return (
 					<div key={idx} className="room-name-wrapper">
+						<button
+							className="button--unread-messages"
+							onClick={() => this.props.startClearUnread(room.name)}
+						>
+							{this.showUnread(room)}
+						</button>
 						<NavLink to={`/room/${room.name}`} activeClassName="room-selected">
-							<div className="room-name">{room.name.toUpperCase()}</div>
+							<div className="room-name">{room.name}</div>
 						</NavLink>
 					</div>
 				);
 			});
-			return rooms;
+			return roomList;
 		}
 	};
 
@@ -57,18 +59,17 @@ class ShowRooms extends React.Component {
 }
 
 ShowRooms.propTypes = {
-	allRooms: PropTypes.array.isRequired,
-	auth: PropTypes.object.isRequired,
-	getRoomsFromDB: PropTypes.func.isRequired
+	rooms: PropTypes.array.isRequired,
+	auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-	allRooms: state.allRooms,
+	rooms: state.rooms,
 	auth: state.auth
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	getRoomsFromDB: () => dispatch(getRoomsFromDB())
+	startClearUnread: (roomName) => dispatch(startClearUnread(roomName))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowRooms);
