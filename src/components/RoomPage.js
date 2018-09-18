@@ -1,9 +1,18 @@
-import React from 'react';
+import React,  { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { startSendMessage, startLeaveRoom, startJoinRoom, startClearUnread } from '../actions/rooms';
 import { fetchAllUsers } from '../actions/users';
 import Messages from './Messages';
 import PeopleModal from './PeopleModal';
+
+/***
+* Render RoomPage Page component.
+* @param {startSendMessage} function handler. 
+* @param {startLeaveRoom}  function handler.
+* @param {startClearUnread}  function handler.
+* @param {startJoinRoom}  function handler.
+* @param {fetchAllUsers}  function handler.
+***/
 
 export class RoomPage extends React.Component {
 	state = {
@@ -56,16 +65,6 @@ export class RoomPage extends React.Component {
 		});
 	};
 
-	componentDidUpdate() {
-		// const rooms = this.props.rooms;
-		// if (rooms.length > 0) {
-		// 	const a = rooms.find((room) => {
-		// 		if (room.name === this.roomName) {
-		// 		}
-		// 	});
-		// }
-	}
-
 	render() {
 		const { users, auth } = this.props;
 		return (
@@ -99,6 +98,15 @@ export class RoomPage extends React.Component {
 	}
 }
 
+RoomPage.propTypes = {
+	rooms: React.PropTypes.array,
+	auth: PropTypes.object,
+	startSendMessage:PropTypes.func,
+	startLeaveRoom:PropTypes.func,
+	startClearUnread:PropTypes.func,
+	startJoinRoom:PropTypes.func,
+	fetchAllUsers:PropTypes.func
+}
 const mapStateToProps = (state) => ({
 	rooms: state.rooms,
 	auth: state.auth,
