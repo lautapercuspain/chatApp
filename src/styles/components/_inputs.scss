@@ -1,21 +1,23 @@
-.text-input {
-  border: 1px solid #cacccd;
-  height: 50px;
-  font-size: $font-size-large;
-  font-weight: 300;
-  padding: $s-size;
+.text-input,
+input {
+	border: 1px solid #cacccd;
+	color: #757575;
+	height: 50px;
+	font-size: $font-size-large;
+	font-weight: 300;
+	padding: $s-size;
 }
 
 .text-input--join {
-  @extend .text-input;
-  margin-bottom: $m-size;
+	@extend .text-input;
+	margin-bottom: $m-size;
 }
 
 .select {
-  @extend .text-input;
+	@extend .text-input;
 }
 
 .textarea {
-  @extend .text-input;
-  height: 10rem;
+	@extend .text-input;
+	height: 10rem;
 }
