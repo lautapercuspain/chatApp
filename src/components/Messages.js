@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import selectMessages from '../selectors/messages';
+import selectMessages from '../util/messages';
 import moment from 'moment';
 
 class Messages extends React.Component {
