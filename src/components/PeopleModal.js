@@ -3,10 +3,6 @@ import Modal from 'react-modal';
 import { connect } from 'react-redux';
 
 class PeopleModal extends React.Component {
-	componentWillMount() {
-		console.log('props in people', this.props);
-	}
-
 	joinPrivateRoom = (user, roomName) => {
 		const data = {
 			roomName: roomName,
