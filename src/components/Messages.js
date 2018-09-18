@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import selectMessages from '../util/messages';
 import moment from 'moment';
-
+/***
+* Render Messages Page component.
+* @param {messages} An array of chat messages.
+***/
 class Messages extends React.Component {
 	componentDidMount() {
 		this.scrollToBottom(false);
@@ -76,6 +79,9 @@ class Messages extends React.Component {
 	}
 }
 
+Messages.propTypes = {
+  messages: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired
+}
 const mapStateToProps = (state, props) => ({
 	messages: selectMessages(state.rooms, props.roomName)
 });
