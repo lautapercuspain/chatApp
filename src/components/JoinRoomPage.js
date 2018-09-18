@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Autocomplete from 'react-autocomplete';
 import { startCreateRoom, startJoinRoom } from '../actions/rooms';
 
 import database, { firebase } from '../firebase/firebase';
@@ -12,7 +13,8 @@ import database, { firebase } from '../firebase/firebase';
 export class JoinRoomPage extends React.Component {
 	state = {
 		error: '',
-		joinError: ''
+		joinError: '',
+		inputValue: 'Start typing to search'
 	};
 
 	componentWillMount() {
@@ -102,21 +104,42 @@ export class JoinRoomPage extends React.Component {
 		e.preventDefault();
 		const user = this.props.auth;
 		const data = {
-			roomName: e.target.rname.value,
+			roomName: this.state.inputValue,
 			id: user.uid,
 			name: user.displayName,
 			unread: 0
 		};
 		this.props.startJoinRoom(data, this.showJoinError);
 	};
-
+	onChangeValue = (e) => {
+		this.setState({
+			inputValue: e.target.value
+		});
+	};
+	onSelectValue = (val) => {
+		this.setState({
+			inputValue: val
+		});
+	};
 	render() {
+		const { rooms } = this.props;
 		return (
 			<div className="box-layout--join">
 				<div className="box-layout__box--join">
 					<h1 className="box-layout__title">Join a room</h1>
 					<form onSubmit={this.onJoinRoom} autoComplete="off">
-						<input className="text-input--join" placeholder="Enter Room name" name="rname" />
+						<Autocomplete
+							className="text-input--join"
+							getItemValue={(item) => item.name}
+							items={rooms}
+							renderItem={(item, isHighlighted) => (
+								<div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>{item.name}</div>
+							)}
+							value={this.state.inputValue}
+							onChange={this.onChangeValue}
+							onSelect={this.onSelectValue}
+						/>
+
 						<button className="button--join">Join</button>
 						{this.state.joinError && (
 							<p className="message__time" style={{ color: 'black' }}>
@@ -160,7 +183,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-	auth: state.auth
+	auth: state.auth,
+	rooms: state.rooms
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(JoinRoomPage);
