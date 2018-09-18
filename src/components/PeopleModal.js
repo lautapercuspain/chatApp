@@ -10,7 +10,6 @@ class PeopleModal extends React.Component {
 			name: user.name,
 			unread: 0
 		};
-		// console.log(data, startJoinRoom);
 		this.props.startJoinPrivateRoom(data, roomName);
 	};
 
