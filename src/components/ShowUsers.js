@@ -20,7 +20,7 @@ class ShowUsers extends React.Component {
 			const name = user.displayName;
 			const room = {
 				name: roomId,
-				private: false,
+				private: true,
 				people: {
 					id: user.uid,
 					name,
@@ -37,7 +37,9 @@ class ShowUsers extends React.Component {
 				name: targetUser.name,
 				unread: 0
 			};
-			this.props.startJoinRoom(data, this.showJoinError);
+			setTimeout(() => {
+				this.props.startJoinRoom(data, this.showJoinError);
+			}, 500);
 		}
 	};
 	returnUsers = () => {
@@ -51,13 +53,13 @@ class ShowUsers extends React.Component {
 				const roomId = `${uid}-${userId}`;
 				return (
 					<div key={idx} className="room-name-wrapper">
-						<NavLink to={{ pathname: `/chat/${uid}-${userId}`, params: { roomId: `${uid}-${userId}` } }}>
-							<div className="room-name">
+						<div className="room-name">
+							<NavLink to={`/room/${roomId}`}>
 								<button className="button--user" onClick={() => this.createOneToOneChat(roomId, user)}>
 									{user.name}
 								</button>
-							</div>
-						</NavLink>
+							</NavLink>
+						</div>
 					</div>
 				);
 			});
@@ -77,7 +79,12 @@ class ShowUsers extends React.Component {
 	};
 
 	render() {
-		return <div>{this.returnUsers()}</div>;
+		return (
+			<div>
+				<h3 className="header--user">Logged Users</h3>
+				{this.returnUsers()}
+			</div>
+		);
 	}
 }
 
