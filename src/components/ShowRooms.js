@@ -24,9 +24,8 @@ class ShowRooms extends React.Component {
 
 	returnRooms = () => {
 		const rooms = this.props.rooms;
-
 		if (rooms.length > 0) {
-			const roomList = rooms.map((room, idx) => {
+			const roomList = rooms.filter((room) => !room.restricted).map((room, idx) => {
 				return (
 					<div key={idx} className="room-name-wrapper">
 						<button
