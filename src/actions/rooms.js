@@ -5,10 +5,10 @@ import moment from 'moment';
 import * as path from 'path';
 // import { ipcRenderer } from 'electron';
 
-export const createRoom = ({ id, name, people, messages = [] }) => ({
+export const createRoom = ({ name, people, restricted = false, messages = [] }) => ({
 	type: 'CREATE_ROOM',
 	room: {
-		id,
+		restricted,
 		name,
 		people,
 		messages
@@ -18,8 +18,7 @@ export const createRoom = ({ id, name, people, messages = [] }) => ({
 export const startCreateRoom = (roomper = {}, showCreateError) => {
 	return (dispatch, getState) => {
 		const room = {
-			name: roomper.name,
-			private: roomper.private
+			name: roomper.name
 		};
 		return database.ref('rooms').once('value', (snapshot) => {
 			const rooms = [];
@@ -38,6 +37,7 @@ export const startCreateRoom = (roomper = {}, showCreateError) => {
 							dispatch(
 								createRoom({
 									...roomper,
+									restricted: roomper.private,
 									people: [ roomper.people ]
 								})
 							);
@@ -253,6 +253,7 @@ export const setStartState = () => {
 							dispatch(
 								createRoom({
 									name,
+									restricted: room.private,
 									people: peopleArray,
 									messages: messagesArray
 								})
